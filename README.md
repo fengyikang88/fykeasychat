@@ -10,7 +10,7 @@ Some quick interfaces to handle WeChat
 ## Installation
 
 ```shell
-$ composer require "fengyikang88/FykWechat
+$ composer require fengyikang88/fyk-wechat
 ```
 
 基本使用（以服务端为例）:
