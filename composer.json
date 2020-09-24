@@ -2,12 +2,11 @@
   "name": "fengyikang88/fyk-wechat",
   "description": "Some quick interfaces to handle WeChat",
   "keywords": ["wechat"],
-  "type": "library",
   "support": {
     "issues": "https://github.com/fengyikang88/fyk-wechat/issues",
     "source": "https://github.com/fengyikang88/fyk-wechat"
   },
-  "license": "MIT",
+  "license": "Apache License 2.0",
   "authors": [
     {
       "name": "fengyikang88",
