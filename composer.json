@@ -1,0 +1,24 @@
+{
+  "name": "fengyikang88/FykWechat",
+  "description": "Some quick interfaces to handle WeChat",
+  "keywords": ["wechat"],
+  "type": "library",
+  "support": {
+    "issues": "https://github.com/fengyikang88/FykWechat/issues",
+    "source": "https://github.com/fengyikang88/FykWechat"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "fengyikang88",
+      "email": "414734650@qq.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "FykWechat\\": "src/"
+    }
+  }
+}
