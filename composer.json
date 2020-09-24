@@ -4,8 +4,8 @@
   "keywords": ["wechat"],
   "type": "library",
   "support": {
-    "issues": "https://github.com/fengyikang88/FykWechat/issues",
-    "source": "https://github.com/fengyikang88/FykWechat"
+    "issues": "https://github.com/fengyikang88/fyk-wechat/issues",
+    "source": "https://github.com/fengyikang88/fyk-wechat"
   },
   "license": "MIT",
   "authors": [
@@ -14,7 +14,7 @@
       "email": "414734650@qq.com"
     }
   ],
-  "minimum-stability": "dev",
+  "minimum-stability": "stable",
   "require": {},
   "autoload": {
     "psr-4": {
