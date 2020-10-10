@@ -7,7 +7,7 @@ namespace FykWechat;
 class Common
 {
     /**
-     * Curl
+     * GET Curl
      * @param $url
      * @param string $data
      * @param string $method
@@ -36,5 +36,31 @@ class Common
         $result = curl_exec($curl);
         curl_close($curl);
         return $result;
+    }
+
+    /**
+     * POST
+     * @param $url
+     * @param $data
+     * @param bool $header
+     * @param string $method
+     * @return mixed
+     */
+    public function curl($url, $data, $header = false, $method = "POST")
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        if ($header) {
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        }
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
+        if ($data) {
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        }
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        $ret = curl_exec($ch);
+        return $ret;
     }
 }

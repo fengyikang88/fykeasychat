@@ -30,7 +30,7 @@ class HxChat extends Common
             'client_id' => $this->client_id,
             'client_secret' => $this->client_secret
         );
-        $rs = json_decode($this->httpCurl($url, $data), true);
+        $rs = json_decode($this->curl($url, $data), true);
         $this->token = $rs['access_token'];
     }
 
@@ -53,7 +53,7 @@ class HxChat extends Common
             'Content-Type: application/json',
             'Authorization: Bearer ' . $this->token
         );
-        return $this->httpCurl($url, $data, $header, "POST");
+        return $this->curl($url, $data, $header, "POST");
     }
 
     /**
@@ -68,7 +68,7 @@ class HxChat extends Common
         $header = array(
             'Authorization: Bearer ' . $this->token
         );
-        return $this->httpCurl($url, "", $header, "POST");
+        return $this->curl($url, "", $header, "POST");
     }
 
     /**
@@ -83,7 +83,7 @@ class HxChat extends Common
         $header = array(
             'Authorization: Bearer ' . $this->token
         );
-        return $this->httpCurl($url, "", $header, "DELETE");
+        return $this->curl($url, "", $header, "DELETE");
     }
 
     /**
@@ -97,7 +97,7 @@ class HxChat extends Common
         $header = array(
             'Authorization: Bearer ' . $this->token
         );
-        return $this->httpCurl($url, "", $header, "GET");
+        return $this->curl($url, "", $header, "GET");
     }
 
     /**
@@ -128,7 +128,7 @@ class HxChat extends Common
                 'attr2' => "v2"
             )
         );
-        return $this->httpCurl($url, $data, $header, "POST");
+        return $this->curl($url, $data, $header, "POST");
     }
 
     /**
@@ -142,7 +142,7 @@ class HxChat extends Common
         $header = array(
             'Authorization: Bearer ' . $this->token
         );
-        return $this->httpCurl($url, "", $header, "GET");
+        return $this->curl($url, "", $header, "GET");
     }
 
     /**
@@ -156,7 +156,7 @@ class HxChat extends Common
         $header = array(
             'Authorization: Bearer ' . $this->token
         );
-        return $this->httpCurl($url, "", $header, "GET");
+        return $this->curl($url, "", $header, "GET");
     }
 
     /**
@@ -170,7 +170,7 @@ class HxChat extends Common
         $header = array(
             'Authorization: Bearer ' . $this->token
         );
-        return $this->httpCurl($url, "", $header, "GET");
+        return $this->curl($url, "", $header, "GET");
     }
 
     /**
@@ -186,7 +186,7 @@ class HxChat extends Common
             'Authorization: Bearer ' . $this->token
         );
         $data['newpassword'] = $newpassword;
-        return $this->httpCurl($url, $data, $header, "PUT");
+        return $this->curl($url, $data, $header, "PUT");
     }
 
     /**
@@ -200,7 +200,7 @@ class HxChat extends Common
         $header = array(
             'Authorization: Bearer ' . $this->token
         );
-        return $this->httpCurl($url, "", $header, "DELETE");
+        return $this->curl($url, "", $header, "DELETE");
     }
 
     /**
@@ -216,7 +216,7 @@ class HxChat extends Common
             'Authorization: Bearer ' . $this->token
         );
         $data['nickname'] = $nickname;
-        return $this->httpCurl($url, $data, $header, "PUT");
+        return $this->curl($url, $data, $header, "PUT");
     }
 
 }
