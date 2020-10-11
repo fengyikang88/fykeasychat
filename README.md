@@ -11,7 +11,7 @@ Some quick interfaces to handle WeChat HxChat
 ## Installation
 
 ```shell
-$ composer require fengyikang88/fykwechat
+$ composer require fengyikang88/fykeasychat
 ```
 
 基本使用（以服务端为例）:
