@@ -1,7 +1,7 @@
 <?php
 
 
-namespace FykWechat;
+namespace FykEasyChat;
 
 
 class Common

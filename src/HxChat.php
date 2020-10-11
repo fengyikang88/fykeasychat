@@ -1,9 +1,13 @@
 <?php
 
 
-namespace FykWechat;
+namespace FykEasyChat;
 
-
+/**
+ * Class HxChat
+ * @author fyk
+ * @package FykEasyChat
+ */
 class HxChat extends Common
 {
 

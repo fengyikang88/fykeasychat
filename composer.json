@@ -1,7 +1,7 @@
 {
-  "name": "fengyikang88/fykwechat",
+  "name": "fengyikang88/FykEasyChat",
   "description": "Some quick interfaces to handle WeChat",
-  "keywords": ["wechat"],
+  "keywords": ["wechat、环信即时聊天"],
   "license": "MIT",
   "authors": [
     {
@@ -14,7 +14,7 @@
   },
   "autoload": {
     "psr-4": {
-      "FykWechat\\": "src/"
+      "FykEasyChat\\": "src/"
     }
   }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace FykWechat;
+namespace FykEasyChat;
 
 /**
  * Class WechatQrcode Mini

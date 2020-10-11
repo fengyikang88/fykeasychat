@@ -1,11 +1,12 @@
-# FykWechat
-Some quick interfaces to handle WeChat
+# FykEasyChat
+Some quick interfaces to handle WeChat HxChat
 
 ## Requirement
 
 1. PHP >= 7.0
 2. **[Composer](https://getcomposer.org/)**
 3. fileinfo 拓展（素材管理模块需要用到）
+4. WeChat、环信即时聊天
 
 ## Installation
 
@@ -17,7 +18,7 @@ $ composer require fengyikang88/fykwechat
 
 ```php
 <?php
-use FykWechat\WechatQrcode;
+use FykEasyChat\WechatQrcode;
 
         $config =[
             'app_id'  => '',// 小程序app_id
