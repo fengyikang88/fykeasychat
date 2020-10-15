@@ -29,11 +29,11 @@ class HxChat extends Common
         $this->url = $config['url'];
 
         $url = $this->url . "/token";
-        $data = array(
+        $data = [
             'grant_type' => 'client_credentials',
             'client_id' => $this->client_id,
             'client_secret' => $this->client_secret
-        );
+        ];
         $rs = json_decode($this->curl($url, $data), true);
         $this->token = $rs['access_token'];
     }
@@ -48,15 +48,15 @@ class HxChat extends Common
     public function hx_register($username, $password, $nickname)
     {
         $url = $this->url . "/users";
-        $data = array(
+        $data = [
             'username' => $username,
             'password' => $password,
             'nickname' => $nickname
-        );
-        $header = array(
+        ];
+        $header = [
             'Content-Type: application/json',
             'Authorization: Bearer ' . $this->token
-        );
+        ];
         return $this->curl($url, $data, $header, "POST");
     }
 
@@ -69,9 +69,9 @@ class HxChat extends Common
     public function hx_contacts($owner_username, $friend_username)
     {
         $url = $this->url . "/users/${owner_username}/contacts/users/${friend_username}";
-        $header = array(
+        $header = [
             'Authorization: Bearer ' . $this->token
-        );
+        ];
         return $this->curl($url, "", $header, "POST");
     }
 
@@ -84,9 +84,9 @@ class HxChat extends Common
     public function hx_contacts_delete($owner_username, $friend_username)
     {
         $url = $this->url . "/users/${owner_username}/contacts/users/${friend_username}";
-        $header = array(
+        $header = [
             'Authorization: Bearer ' . $this->token
-        );
+        ];
         return $this->curl($url, "", $header, "DELETE");
     }
 
@@ -98,9 +98,9 @@ class HxChat extends Common
     public function hx_contacts_user($owner_username)
     {
         $url = $this->url . "/users/${owner_username}/contacts/users";
-        $header = array(
+        $header = [
             'Authorization: Bearer ' . $this->token
-        );
+        ];
         return $this->curl($url, "", $header, "GET");
     }
 
@@ -114,24 +114,24 @@ class HxChat extends Common
     public function hx_send($sender, $receiver, $msg)
     {
         $url = $this->url . "/messages";
-        $header = array(
+        $header = [
             'Authorization: Bearer ' . $this->token
-        );
-        $data = array(
+        ];
+        $data = [
             'target_type' => 'users',
-            'target' => array(
+            'target' => [
                 '0' => $receiver
-            ),
-            'msg' => array(
+            ],
+            'msg' => [
                 'type' => "txt",
                 'msg' => $msg
-            ),
+            ],
             'from' => $sender,
-            'ext' => array(
+            'ext' => [
                 'attr1' => 'v1',
                 'attr2' => "v2"
-            )
-        );
+            ]
+        ];
         return $this->curl($url, $data, $header, "POST");
     }
 
@@ -143,9 +143,9 @@ class HxChat extends Common
     public function hx_msg_count($owner_username)
     {
         $url = $this->url . "/users/${owner_username}/offline_msg_count";
-        $header = array(
+        $header = [
             'Authorization: Bearer ' . $this->token
-        );
+        ];
         return $this->curl($url, "", $header, "GET");
     }
 
@@ -157,9 +157,9 @@ class HxChat extends Common
     public function hx_user_info($username)
     {
         $url = $this->url . "/users/${username}";
-        $header = array(
+        $header = [
             'Authorization: Bearer ' . $this->token
-        );
+        ];
         return $this->curl($url, "", $header, "GET");
     }
 
@@ -171,9 +171,9 @@ class HxChat extends Common
     public function hx_user_infos($limit)
     {
         $url = $this->url . "/users?${limit}";
-        $header = array(
+        $header = [
             'Authorization: Bearer ' . $this->token
-        );
+        ];
         return $this->curl($url, "", $header, "GET");
     }
 
@@ -186,9 +186,9 @@ class HxChat extends Common
     public function hx_user_update_password($username, $newpassword)
     {
         $url = $this->url . "/users/${username}/password";
-        $header = array(
+        $header = [
             'Authorization: Bearer ' . $this->token
-        );
+        ];
         $data['newpassword'] = $newpassword;
         return $this->curl($url, $data, $header, "PUT");
     }
@@ -201,9 +201,9 @@ class HxChat extends Common
     public function hx_user_delete($username)
     {
         $url = $this->url . "/users/${username}";
-        $header = array(
+        $header = [
             'Authorization: Bearer ' . $this->token
-        );
+        ];
         return $this->curl($url, "", $header, "DELETE");
     }
 
@@ -216,9 +216,9 @@ class HxChat extends Common
     public function hx_user_update_nickname($username, $nickname)
     {
         $url = $this->url . "/users/${username}";
-        $header = array(
+        $header = [
             'Authorization: Bearer ' . $this->token
-        );
+        ];
         $data['nickname'] = $nickname;
         return $this->curl($url, $data, $header, "PUT");
     }
