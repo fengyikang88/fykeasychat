@@ -18,7 +18,7 @@ class WechatOpenid extends Common
 
         $this->app_id = $config['app_id'];
         $this->secret = $config['secret'];
-        $this->web_url = $config['web_url'];
+        $this->web_url = $config['web_url']??"";
         $this->snsapi = $config['snsapi']??'snsapi_userinfo';
 
     }
@@ -45,7 +45,7 @@ class WechatOpenid extends Common
 
         //access_token
         $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$this->app_id.'&secret='.$this->secret.'&code='.$code.'&grant_type=authorization_code';
-        $data = $this->httpCurl($url);
+        $data = $this->curlGet($url);
         if(empty($data['access_token'])){
             echo 'access_token error';exit;
         }
@@ -57,11 +57,11 @@ class WechatOpenid extends Common
         $openid = $data['openid'];
         $link = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$token.'&openid='.$openid.'&lang=zh_CN';
         //information
-        $res = json_encode($this->httpCurl($link));
+        $res = json_encode($this->curlGet($link));
 
-        $user_openid = json_decode($res,true);
+        $userOpenid = json_decode($res,true);
 
-        return $user_openid;
+        return $userOpenid;
 
     }
 
