@@ -7,6 +7,19 @@ namespace FykEasyChat;
 class Common
 {
     /**
+     * @return mixed
+     * @author fyk
+     * Time 2020/12/28
+     */
+    public function getAccessToken()
+    {
+        $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$this->app_id&secret=$this->secret";
+        $res = json_decode($this->httpCurl($url));
+
+        return $res->access_token;
+    }
+
+    /**
      * GET Curl
      * @param $url
      * @param string $data
