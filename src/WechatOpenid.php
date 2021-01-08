@@ -32,7 +32,6 @@ class WechatOpenid extends Common
         $redirect_uri = urlencode($link);
         //WeChat appId
         $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$this->app_id.'&redirect_uri='.$redirect_uri.'&response_type=code&scope='.$this->snsapi.'&state=STATE#wechat_redirect';
-
         header('Location:'.$url);
     }
 
@@ -59,9 +58,7 @@ class WechatOpenid extends Common
         //information
         $res = json_encode($this->curlGet($link));
 
-        $userOpenid = json_decode($res,true);
-
-        return $userOpenid;
+        return json_decode($res,true);
 
     }
 
