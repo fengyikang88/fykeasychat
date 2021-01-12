@@ -3,7 +3,12 @@
 
 namespace FykEasyChat;
 
-
+/**
+ * @author fyk
+ * Class WechatJssDk
+ * @package FykEasyChat
+ * Time 2021/1/12
+ */
 class WechatJssDk extends Common
 {
     protected $app_id;

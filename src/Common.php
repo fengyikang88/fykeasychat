@@ -92,4 +92,54 @@ class Common
         curl_close($curl);
         return json_decode($data,true);
     }
+
+
+    /**
+     * Generate signature algorithm
+     * @param $param
+     * @param $appSecret
+     * @return false|string
+     * @author fyk
+     * Time 2021/1/12
+     */
+    public function getSign($param,$appSecret) {
+        if(empty($param)){
+            return false;
+        }
+        $str = '';
+        $i = 0;
+        foreach ($param as $k=>$v) {
+            if($i == 0){
+                $str = $k.'='.$v;
+            }else{
+                $str .= '&'.$k.'='.$v;
+            }
+            $i++;
+        }
+        $res = $str.$appSecret;
+
+        $sha256 = hash('sha256',$res,true);
+        return base64_encode($sha256);
+    }
+
+    /**
+     * Generate unique UUID algorithm
+     * @param int $length
+     * @return false|string
+     * @throws \Exception
+     * @author fyk
+     * Time 2021/1/12
+     */
+    public function uuid($length = 16 )
+    {
+        if (function_exists('random_bytes')) {
+            $uuid = bin2hex(\random_bytes($length));
+        } else if (function_exists('openssl_random_pseudo_bytes')) {
+            $uuid = bin2hex(\openssl_random_pseudo_bytes($length));
+        } else {
+            $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $uuid = substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
+        }
+        return $uuid;
+    }
 }
