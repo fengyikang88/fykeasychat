@@ -42,7 +42,7 @@ class WechatJssDk extends Common
                 "signature" => $signature,
                 "rawString" => $string
             );
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return $e->getMessage();
         }
     }

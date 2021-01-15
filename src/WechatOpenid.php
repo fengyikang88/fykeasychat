@@ -48,10 +48,10 @@ class WechatOpenid extends Common
         try {
             $data = $this->curlGet($url);
             if(empty($data['access_token'])){
-                throw new Exception('access_token error');
+                throw new \Exception('access_token error');
             }
             if(empty($data['openid'])){
-                throw new Exception('openid error');
+                throw new \Exception('openid error');
             }
             //openid
             $token = $data['access_token'];
@@ -61,7 +61,7 @@ class WechatOpenid extends Common
             $res = json_encode($this->curlGet($link));
 
             return json_decode($res,true);
-        }catch (Exception $e) {
+        }catch (\Exception $e) {
             return $e->getMessage();
         }
 

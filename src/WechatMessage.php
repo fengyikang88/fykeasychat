@@ -64,7 +64,7 @@ class WechatMessage extends Common
 
         try{
             return $this->httpCurl($url, json_encode($data),"POST");
-        }catch (Exception $e) {
+        }catch (\Throwable $e) {
             return $e->getMessage();
         }
     }

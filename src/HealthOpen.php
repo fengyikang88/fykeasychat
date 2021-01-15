@@ -58,7 +58,7 @@ class HealthOpen extends Common
         ];
         try {
             return $this->curl($url,$parameter);
-        }catch (Exception $e) {
+        }catch (\Throwable $e) {
             return $e->getMessage();
         }
 
@@ -140,7 +140,7 @@ class HealthOpen extends Common
         try {
             return $this->curl($url,$data);
 
-        }catch (Exception $e) {
+        }catch (\Throwable $e) {
             return $e->getMessage();
         }
 
@@ -188,7 +188,7 @@ class HealthOpen extends Common
         //curl
         try {
             return $this->curl($url,$data);
-        }catch (Exception $e) {
+        }catch (\Throwable $e) {
             return $e->getMessage();
         }
     }
@@ -235,7 +235,7 @@ class HealthOpen extends Common
         //curl
         try {
            return $this->curl($url,$data);
-        }catch (Exception $e) {
+        }catch (\Throwable $e) {
             return $e->getMessage();
         }
     }
@@ -282,7 +282,7 @@ class HealthOpen extends Common
         //curl
         try {
            return $this->curl($url,$data);
-        }catch (Exception $e) {
+        }catch (\Throwable $e) {
             return $e->getMessage();
         }
     }
@@ -337,7 +337,7 @@ class HealthOpen extends Common
         //curl
         try {
             return $this->curl($url,$data);
-        }catch (Exception $e) {
+        }catch (\Throwable $e) {
             return $e->getMessage();
         }
     }
