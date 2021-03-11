@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f06ab8f4-5ebf-431f-9f87-7d113b3952c8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/FykWechat.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FykWechat.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Common.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Common.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WechatOpenid.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/WechatOpenid.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HealthOpen.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/HealthOpen.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +37,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -69,6 +68,8 @@
       <workItem from="1604481563334" duration="911000" />
       <workItem from="1606697133603" duration="381000" />
       <workItem from="1606892982465" duration="484000" />
+      <workItem from="1611659800970" duration="22000" />
+      <workItem from="1611659994375" duration="12000" />
     </task>
     <servers />
   </component>
