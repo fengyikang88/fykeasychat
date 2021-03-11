@@ -44,21 +44,26 @@ class WechatOpenid extends Common
 
         //access_token
         $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$this->app_id.'&secret='.$this->secret.'&code='.$code.'&grant_type=authorization_code';
-        $data = $this->curlGet($url);
-        if(empty($data['access_token'])){
-            echo 'access_token error';exit;
-        }
-        if(empty($data['openid'])){
-            echo 'openid error';exit;
-        }
-        //openid
-        $token = $data['access_token'];
-        $openid = $data['openid'];
-        $link = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$token.'&openid='.$openid.'&lang=zh_CN';
-        //information
-        $res = json_encode($this->curlGet($link));
 
-        return json_decode($res,true);
+        try {
+            $data = $this->curlGet($url);
+            if(empty($data['access_token'])){
+                throw new \Exception('access_token error');
+            }
+            if(empty($data['openid'])){
+                throw new \Exception('openid error');
+            }
+            //openid
+            $token = $data['access_token'];
+            $openid = $data['openid'];
+            $link = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$token.'&openid='.$openid.'&lang=zh_CN';
+            //information
+            $res = json_encode($this->curlGet($link));
+
+            return json_decode($res,true);
+        }catch (\Exception $e) {
+            return $e->getMessage();
+        }
 
     }
 

@@ -58,7 +58,11 @@ class HealthOpen extends Common
         ];
         try {
             return $this->curl($url,$parameter);
+<<<<<<< HEAD
         }catch (Exception $e) {
+=======
+        }catch (\Throwable $e) {
+>>>>>>> f373286b6b25a67e21b534d0ca95eda962033594
             return $e->getMessage();
         }
 
@@ -140,7 +144,11 @@ class HealthOpen extends Common
         try {
             return $this->curl($url,$data);
 
+<<<<<<< HEAD
         }catch (Exception $e) {
+=======
+        }catch (\Throwable $e) {
+>>>>>>> f373286b6b25a67e21b534d0ca95eda962033594
             return $e->getMessage();
         }
 
@@ -188,7 +196,11 @@ class HealthOpen extends Common
         //curl
         try {
             return $this->curl($url,$data);
+<<<<<<< HEAD
         }catch (Exception $e) {
+=======
+        }catch (\Throwable $e) {
+>>>>>>> f373286b6b25a67e21b534d0ca95eda962033594
             return $e->getMessage();
         }
     }
@@ -235,7 +247,11 @@ class HealthOpen extends Common
         //curl
         try {
            return $this->curl($url,$data);
+<<<<<<< HEAD
         }catch (Exception $e) {
+=======
+        }catch (\Throwable $e) {
+>>>>>>> f373286b6b25a67e21b534d0ca95eda962033594
             return $e->getMessage();
         }
     }
@@ -282,7 +298,11 @@ class HealthOpen extends Common
         //curl
         try {
            return $this->curl($url,$data);
+<<<<<<< HEAD
         }catch (Exception $e) {
+=======
+        }catch (\Throwable $e) {
+>>>>>>> f373286b6b25a67e21b534d0ca95eda962033594
             return $e->getMessage();
         }
     }
@@ -337,7 +357,11 @@ class HealthOpen extends Common
         //curl
         try {
             return $this->curl($url,$data);
+<<<<<<< HEAD
         }catch (Exception $e) {
+=======
+        }catch (\Throwable $e) {
+>>>>>>> f373286b6b25a67e21b534d0ca95eda962033594
             return $e->getMessage();
         }
     }
