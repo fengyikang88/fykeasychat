@@ -15,29 +15,30 @@ class HealthOpen extends Common
     protected $appSecret;
     protected $hospitalId;
     protected $paTid;
+    protected $channelNum;
 
     public function __construct($config){
         $this->appId = $config['appId'];
         $this->appSecret = $config['appSecret'];
         $this->hospitalId = $config['hospitalId'];
         $this->paTid = $config['paTid']??"";
+        $this->channelNum = $config['channelNum']??0; //填入代码，0为微信服务号渠道，1为微信小程序渠道，3为刷脸终端，4为扫码终端
     }
 
     /**
      * Get interface call credentials appToken interface
-     * @param int $channelNum 填入代码，0为微信服务号渠道，1为微信小程序渠道，3为刷脸终端，4为扫码终端
      * @return mixed|string
      * @throws \Exception
      * @author fyk
      * Time 2021/1/12
      */
-    public function getAppToken(int $channelNum = 0)
+    public function getAppToken()
     {
         $url = 'https://p-healthopen.tengmed.com/rest/auth/HealthCard/HealthOpenAuth/AuthObj/getAppToken';
         $uuid = $this->uuid();
         $param = [
             "appId" => $this->appId,
-            "channelNum" => 0,
+            "channelNum" => $this->channelNum,
             "hospitalId" =>$this->hospitalId,
             "requestId"=>$uuid,
             "timestamp"=>time(),
@@ -47,9 +48,9 @@ class HealthOpen extends Common
             "commonIn" =>[
                 "appToken"=> "",
                 "requestId"=> $uuid,
-                "hospitalId"=> "32501",
+                "hospitalId"=> $this->hospitalId,
                 "timestamp"=>time(),
-                "channelNum"=> 0,
+                "channelNum"=> $this->channelNum,
                 "sign"=> $sign
             ],
             "req"=>[
@@ -58,11 +59,7 @@ class HealthOpen extends Common
         ];
         try {
             return $this->curl($url,$parameter);
-<<<<<<< HEAD
-        }catch (Exception $e) {
-=======
-        }catch (\Throwable $e) {
->>>>>>> f373286b6b25a67e21b534d0ca95eda962033594
+        }catch (\Exception $e) {
             return $e->getMessage();
         }
 
@@ -82,14 +79,13 @@ class HealthOpen extends Common
      * @param string $phone2 联系方式2
      * @param string $address 地址
      * @param string $relation 家庭关系
-     * @param int $channelNum
      * @return mixed|string
      * @throws \Exception
      * @author fyk
      * Time 2021/1/12
      */
     public function getRegisterHealthCard(string $token,string $wechatCode,string $name,string $gender,string $nation,
-                                          string $birthday,string $idNumber,string $idType,string $phone1,string $phone2 = "",string $address = "",string $relation = "",int $channelNum = 0)
+                                          string $birthday,string $idNumber,string $idType,string $phone1,string $phone2 = "",string $address = "",string $relation = "")
     {
         $url = 'https://p-healthopen.tengmed.com/rest/auth/HealthCard/HealthOpenPlatform/ISVOpenObj/registerHealthCard';
         $uuid = $this->uuid();
@@ -98,7 +94,7 @@ class HealthOpen extends Common
             "requestId"=>$uuid,
             "hospitalId"=>$this->hospitalId,
             "timestamp"=>time(),
-            "channelNum"=>$channelNum,
+            "channelNum"=>$this->channelNum,
             "wechatCode"=>$wechatCode,
             "name"=> $name,
             "gender"=>$gender,
@@ -109,18 +105,19 @@ class HealthOpen extends Common
             "relation"=> $relation,
             "address"=> $address,
             "phone1"=> $phone1,
-            "phone2"=> $phone2,
-            "patid"=> $this->paTid
+//            "phone2"=> $phone2,
+//            "patid"=> $this->paTid
         ];
         ksort($parameter);
         //签名
         $sign = self::getSign($parameter,$this->appSecret);
+        // print_r($sign);die;
         //传参
         $data = [
             "commonIn" =>[
                 "appToken"=> $token,
-                "channelNum"=> 0,
-                "hospitalId"=> "32501",
+                "channelNum"=> $this->channelNum,
+                "hospitalId"=> $this->hospitalId,
                 "requestId"=> $uuid,
                 "sign"=> $sign,
                 "timestamp"=>time(),
@@ -144,11 +141,7 @@ class HealthOpen extends Common
         try {
             return $this->curl($url,$data);
 
-<<<<<<< HEAD
-        }catch (Exception $e) {
-=======
-        }catch (\Throwable $e) {
->>>>>>> f373286b6b25a67e21b534d0ca95eda962033594
+        }catch (\Exception $e) {
             return $e->getMessage();
         }
 
@@ -158,13 +151,12 @@ class HealthOpen extends Common
      * Get health card interface through health card authorization code
      * @param string $token
      * @param string $healthCode
-     * @param int $channelNum
      * @return mixed|string
      * @throws \Exception
      * @author fyk
      * Time 2021/1/12
      */
-    public function getHealthCardByHealthCode(string $token,string $healthCode,int $channelNum = 0)
+    public function getHealthCardByHealthCode(string $token,string $healthCode)
     {
         $url = 'https://p-healthopen.tengmed.com/rest/auth/HealthCard/HealthOpenPlatform/ISVOpenObj/getHealthCardByHealthCode';
         $uuid = $this->uuid();
@@ -173,7 +165,7 @@ class HealthOpen extends Common
             "requestId"=>$uuid,
             "hospitalId"=>$this->hospitalId,
             "timestamp"=>time(),
-            "channelNum"=>$channelNum,
+            "channelNum"=>$this->channelNum,
             "healthCode"=>$healthCode,
         ];
         ksort($parameter);
@@ -186,7 +178,7 @@ class HealthOpen extends Common
                 "requestId"=> $uuid,
                 "hospitalId"=> $this->hospitalId,
                 "timestamp"=>time(),
-                "channelNum"=> $channelNum,
+                "channelNum"=> $this->channelNum,
                 "sign"=> $sign,
             ],
             "req"=>[
@@ -196,11 +188,7 @@ class HealthOpen extends Common
         //curl
         try {
             return $this->curl($url,$data);
-<<<<<<< HEAD
-        }catch (Exception $e) {
-=======
-        }catch (\Throwable $e) {
->>>>>>> f373286b6b25a67e21b534d0ca95eda962033594
+        }catch (\Exception $e) {
             return $e->getMessage();
         }
     }
@@ -209,13 +197,12 @@ class HealthOpen extends Common
      * Get the health card interface through the health card QR code
      * @param string $token
      * @param string $qrCodeText
-     * @param int $channelNum
      * @return mixed|string
      * @throws \Exception
      * @author fyk
      * Time 2021/1/12
      */
-    public function getHealthCardByQRCode(string $token,string $qrCodeText,int $channelNum = 0)
+    public function getHealthCardByQRCode(string $token,string $qrCodeText)
     {
         $url = 'https://p-healthopen.tengmed.com/rest/auth/HealthCard/HealthOpenPlatform/ISVOpenObj/getHealthCardByQRCode';
         $uuid = $this->uuid();
@@ -224,7 +211,7 @@ class HealthOpen extends Common
             "requestId"=>$uuid,
             "hospitalId"=>$this->hospitalId,
             "timestamp"=>time(),
-            "channelNum"=>$channelNum,
+            "channelNum"=>$this->channelNum,
             "qrCodeText"=>$qrCodeText
         ];
         ksort($parameter);
@@ -237,7 +224,7 @@ class HealthOpen extends Common
                 "requestId"=> $uuid,
                 "hospitalId"=> $this->hospitalId,
                 "timestamp"=>time(),
-                "channelNum"=> $channelNum,
+                "channelNum"=> $this->channelNum,
                 "sign"=> $sign,
             ],
             "req"=>[
@@ -246,12 +233,8 @@ class HealthOpen extends Common
         ];
         //curl
         try {
-           return $this->curl($url,$data);
-<<<<<<< HEAD
-        }catch (Exception $e) {
-=======
-        }catch (\Throwable $e) {
->>>>>>> f373286b6b25a67e21b534d0ca95eda962033594
+            return $this->curl($url,$data);
+        }catch (\Exception $e) {
             return $e->getMessage();
         }
     }
@@ -260,13 +243,12 @@ class HealthOpen extends Common
      * ID photo OCR interface
      * @param string $token
      * @param string $imageContent
-     * @param int $channelNum
      * @return mixed|string
      * @throws \Exception
      * @author fyk
      * Time 2021/1/12
      */
-    public function getOcrInfo(string $token,string $imageContent,int $channelNum = 0)
+    public function getOcrInfo(string $token,string $imageContent)
     {
         $url = 'https://p-healthopen.tengmed.com/rest/auth/HealthCard/HealthOpenPlatform/ISVOpenObj/ocrInfo';
         $uuid = $this->uuid();
@@ -275,7 +257,7 @@ class HealthOpen extends Common
             "requestId"=>$uuid,
             "hospitalId"=>$this->hospitalId,
             "timestamp"=>time(),
-            "channelNum"=>$channelNum,
+            "channelNum"=>$this->channelNum,
             "imageContent"=>$imageContent,
         ];
         ksort($parameter);
@@ -288,7 +270,7 @@ class HealthOpen extends Common
                 "requestId"=> $uuid,
                 "hospitalId"=> $this->hospitalId,
                 "timestamp"=>time(),
-                "channelNum"=> $channelNum,
+                "channelNum"=> $this->channelNum,
                 "sign"=> $sign,
             ],
             "req"=>[
@@ -297,12 +279,8 @@ class HealthOpen extends Common
         ];
         //curl
         try {
-           return $this->curl($url,$data);
-<<<<<<< HEAD
-        }catch (Exception $e) {
-=======
-        }catch (\Throwable $e) {
->>>>>>> f373286b6b25a67e21b534d0ca95eda962033594
+            return $this->curl($url,$data);
+        }catch (\Exception $e) {
             return $e->getMessage();
         }
     }
@@ -328,7 +306,7 @@ class HealthOpen extends Common
             "requestId"=>$uuid,
             "hospitalId"=>$this->hospitalId,
             "timestamp"=>time(),
-            "channelNum"=>0,
+            "channelNum"=>$this->channelNum,
             "healthCardId"=>$healthCardId,
             "idType"=>$idType,
             "idNumber"=>$idNumber,
@@ -344,7 +322,7 @@ class HealthOpen extends Common
                 "requestId"=> $uuid,
                 "hospitalId"=> $this->hospitalId,
                 "timestamp"=>time(),
-                "channelNum"=> 0,
+                "channelNum"=> $this->channelNum,
                 "sign"=> $sign,
             ],
             "req"=>[
@@ -357,11 +335,204 @@ class HealthOpen extends Common
         //curl
         try {
             return $this->curl($url,$data);
-<<<<<<< HEAD
-        }catch (Exception $e) {
-=======
-        }catch (\Throwable $e) {
->>>>>>> f373286b6b25a67e21b534d0ca95eda962033594
+        }catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * Register face order ID interface
+     * @param string $token
+     * @param string $name
+     * @param string $idCardNumber
+     * @return mixed|string
+     * @author fyk
+     * Time 2021/5/24
+     */
+    public function registerOrder(string $token,string $name,string $idCardNumber)
+    {
+        $url = 'https://p-healthopen.tengmed.com/rest/auth/HealthCard/HealthOpenPlatform/ISVOpenObj/registerOrder';
+        $uuid = $this->uuid();
+        $parameter = [
+            "appToken"=>$token,
+            "requestId"=>$uuid,
+            "hospitalId"=>$this->hospitalId,
+            "timestamp"=>time(),
+            "channelNum"=>$this->channelNum,
+            "name"=>$name,
+            "idCardNumber"=>$idCardNumber,
+        ];
+        ksort($parameter);
+        //签名
+        $sign = self::getSign($parameter,$this->appSecret);
+        //传参
+        $data = [
+            "commonIn" =>[
+                "appToken"=> $token,
+                "requestId"=> $uuid,
+                "hospitalId"=> $this->hospitalId,
+                "timestamp"=>time(),
+                "channelNum"=> $this->channelNum,
+                "sign"=> $sign,
+            ],
+            "req"=>[
+                "name"=>$name,
+                "idCardNumber"=>$idCardNumber,
+            ],
+        ];
+        //curl
+        try {
+            return $this->curl($url,$data);
+        }catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * Verify face recognition data interface
+     * @param string $token
+     * @param string $orderId
+     * @param string $verifyResult
+     * @return mixed|string
+     * @author fyk
+     * Time 2021/5/24
+     */
+    public function verifyFaceIdentity(string $token,string $orderId,string $verifyResult)
+    {
+        $url = 'https://p-healthopen.tengmed.com/rest/auth/HealthCard/HealthOpenPlatform/ISVOpenObj/verifyFaceIdentity';
+        $uuid = $this->uuid();
+        $parameter = [
+            "appToken"=>$token,
+            "requestId"=>$uuid,
+            "hospitalId"=>$this->hospitalId,
+            "timestamp"=>time(),
+            "channelNum"=>$this->channelNum,
+            "orderId"=>$orderId,
+            "verifyResult"=>$verifyResult,
+        ];
+        ksort($parameter);
+        //签名
+        $sign = self::getSign($parameter,$this->appSecret);
+        //传参
+        $data = [
+            "commonIn" =>[
+                "appToken"=> $token,
+                "requestId"=> $uuid,
+                "hospitalId"=> $this->hospitalId,
+                "timestamp"=>time(),
+                "channelNum"=> $this->channelNum,
+                "sign"=> $sign,
+            ],
+            "req"=>[
+                "orderId"=>$orderId,
+                "verifyResult"=>$verifyResult,
+            ],
+        ];
+        //curl
+        try {
+            return $this->curl($url,$data);
+        }catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * Interface registerUniformVerifyOrder
+     * @param string $token
+     * @param string $idCard
+     * @param string $name
+     * @param string $cardType
+     * @return mixed|string
+     * @throws \Exception
+     * @author fyk
+     * Time 2021/8/25
+     */
+    public function registerUniformVerifyOrder(string $token,string $idCard,string $name,string $cardType = '01')
+    {
+        $url = 'https://p-healthopen.tengmed.com/rest/auth/HealthCard/HealthOpenPlatform/ISVOpenObj/registerUniformVerifyOrder';
+        $uuid = $this->uuid();
+        $parameter = [
+            "appToken"=>$token,
+            "requestId"=>$uuid,
+            "hospitalId"=>$this->hospitalId,
+            "timestamp"=>time(),
+            "channelNum"=>$this->channelNum,
+            "cardType"=> $cardType,
+            "idCard"=>$idCard,
+            "name"=>$name,
+        ];
+        ksort($parameter);
+        //签名
+        $sign = self::getSign($parameter,$this->appSecret);
+        //传参
+        $data = [
+            "commonIn" =>[
+                "appToken"=> $token,
+                "requestId"=> $uuid,
+                "hospitalId"=> $this->hospitalId,
+                "timestamp"=>time(),
+                "channelNum"=> $this->channelNum,
+                "sign"=> $sign,
+            ],
+            "req"=>[
+                "cardType"=> $cardType,
+                "idCard"=>$idCard,
+                "name"=>$name,
+            ],
+        ];
+        //curl
+        try {
+            return $this->curl($url,$data);
+        }catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * Interface checkUniformVerifyResult
+     * @param string $token
+     * @param string $verifyOrderId
+     * @param string $verifyResult
+     * @return mixed|string
+     * @throws \Exception
+     * @author fyk
+     * Time 2021/8/25
+     */
+    public function checkUniformVerifyResult(string $token,string $verifyOrderId,string $verifyResult)
+    {
+        $url = 'https://p-healthopen.tengmed.com/rest/auth/TXHealthCard/EHealthCardServer/ISVOpenObj/checkUniformVerifyResult';
+        $uuid = $this->uuid();
+        $parameter = [
+            'appToken'=>$token,
+            'requestId'=>$uuid,
+            'hospitalId'=>$this->hospitalId,
+            'timestamp'=>time(),
+            'channelNum'=>$this->channelNum,
+            'verifyOrderId'=>$verifyOrderId,
+            'verifyResult'=>$verifyResult,
+        ];
+        ksort($parameter);
+        //签名
+        $sign = self::getSign($parameter,$this->appSecret);
+        //传参
+        $data = [
+            'commonIn' =>[
+                'appToken'=> $token,
+                'requestId'=> $uuid,
+                'hospitalId'=> $this->hospitalId,
+                'timestamp'=>time(),
+                'channelNum'=> $this->channelNum,
+                'sign'=> $sign,
+            ],
+            'req'=>[
+                'verifyOrderId'=>$verifyOrderId,
+                'verifyResult'=>$verifyResult,
+            ],
+        ];
+        //curl
+        try {
+            return $this->curl($url,$data);
+        }catch (\Exception $e) {
             return $e->getMessage();
         }
     }
