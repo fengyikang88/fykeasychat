@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/fykwechat.iml" filepath="$PROJECT_DIR$/.idea/fykwechat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/FykEasyChat.iml" filepath="$PROJECT_DIR$/.idea/FykEasyChat.iml" />
     </modules>
   </component>
 </project>

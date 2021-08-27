@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f06ab8f4-5ebf-431f-9f87-7d113b3952c8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/FykWechat.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FykEasyChat.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HealthOpen.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/HealthOpen.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +33,7 @@
     <option name="height" value="1050" />
   </component>
   <component name="ProjectId" id="1kzIjmpmcmzbKwf6oqNkjAq6D7T" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -70,10 +73,22 @@
       <workItem from="1606892982465" duration="484000" />
       <workItem from="1611659800970" duration="22000" />
       <workItem from="1611659994375" duration="12000" />
+      <workItem from="1630058741154" duration="352000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

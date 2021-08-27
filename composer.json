@@ -1,7 +1,7 @@
 {
   "name": "fengyikang88/fykeasychat",
   "description": "Some quick interfaces to handle WeChat",
-  "keywords": ["wechat、环信即时聊天"],
+  "keywords": ["WeChat公众号授权、小程序分享码、发送订阅消息、环信即时聊天、微信健康卡开放平台"],
   "license": "MIT",
   "authors": [
     {
