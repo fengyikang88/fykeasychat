@@ -536,4 +536,144 @@ class HealthOpen extends Common
             return $e->getMessage();
         }
     }
+
+    /**
+     * Interface reportHISData Card data monitoring interface
+     * @param string $token
+     * @param string $qrCodeText
+     * @param string $time
+     * @param string $scene
+     * @param string $department
+     * @param string $cardType
+     * @param string $cardCostTypes
+     * @param string $cardChannel
+     * @return mixed|string
+     * @throws \Exception
+     * @author fyk
+     * Time 2021/11/30
+     */
+    public function reportHISData(string $token,string $qrCodeText,string $time,string $scene,string $department,string $cardType,string $cardCostTypes,string $cardChannel = '0401')
+    {
+        $url = 'https://p-healthopen.tengmed.com/rest/auth/HealthCard/HealthOpenPlatform/ISVOpenObj/reportHISData';
+        $uuid = $this->uuid();
+        $parameter = [
+            "appToken"=>$token,
+            "requestId"=>$uuid,
+            "hospitalId"=>$this->hospitalId,
+            "timestamp"=>time(),
+            "channelNum"=>$this->channelNum,
+            "qrCodeText"=>$qrCodeText,
+            "time"=>$time,
+            "hospitalCode"=>$this->hospitalId,
+            "scene"=>$scene,
+            "department"=>$department,
+            "cardType"=>$cardType,
+            "cardChannel"=>$cardChannel,
+            "cardCostTypes"=>$cardCostTypes,
+        ];
+        ksort($parameter);
+        //签名
+        $sign = self::getSign($parameter,$this->appSecret);
+        //传参
+        $data = [
+            "commonIn" =>[
+                "appToken"=> $token,
+                "requestId"=> $uuid,
+                "hospitalId"=> $this->hospitalId,
+                "timestamp"=>time(),
+                "channelNum"=> $this->channelNum,
+                "sign"=> $sign,
+            ],
+            "req"=>[
+                "qrCodeText"=>$qrCodeText,
+                "time"=>$time,
+                "hospitalCode"=>$this->hospitalId,
+                "scene"=>$scene,
+                "department"=>$department,
+                "cardType"=>$cardType,
+                "cardChannel"=>$cardChannel,
+                "cardCostTypes"=>$cardCostTypes,
+            ],
+        ];
+        //curl
+        try {
+            return $this->curl($url,$data);
+        }catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+
+    /**
+     *  Verify health card QR code interface
+     * @param string $token
+     * @param string $qrCodeText
+     * @param string $terminalId
+     * @param string $time
+     * @param string $medicalStep
+     * @param string $channelCode
+     * @param string $hospitalName
+     * @param string $useCityCode
+     * @param string $useCityName
+     * @param string $useType
+     * @return mixed|string
+     * @throws \Exception
+     * @author fyk
+     * Time 2021/12/7
+     */
+    public function verifyQRCode(string $token,string $qrCodeText,string $terminalId,string $time,string $medicalStep,string $channelCode,string $hospitalName,
+                                 string $useCityCode = '421100',string $useCityName = '黄冈市',string $useType = '01')
+    {
+        $url = 'https://p-healthopen.tengmed.com/rest/auth/HealthCard/HealthOpenPlatform/ISVOpenObj/verifyQRCode';
+        $uuid = $this->uuid();
+        $parameter = [
+            "appToken"=>$token,
+            "requestId"=>$uuid,
+            "hospitalId"=>$this->hospitalId,
+            "timestamp"=>time(),
+            "channelNum"=>$this->channelNum,
+            "qrCodeText"=>$qrCodeText,
+            "terminalId"=>$terminalId,
+            "time"=>$time,
+            "medicalStep"=>$medicalStep,
+            "channelCode"=>$channelCode,
+            "useCityCode"=>$useCityCode,
+            "useCityName"=>$useCityName,
+            "hospitalCode"=>$this->hospitalId,
+            "hospitalName"=>$hospitalName,
+            "useType"=>$useType,
+        ];
+        ksort($parameter);
+        //签名
+        $sign = self::getSign($parameter,$this->appSecret);
+        //传参
+        $data = [
+            "commonIn" =>[
+                "appToken"=> $token,
+                "requestId"=> $uuid,
+                "hospitalId"=> $this->hospitalId,
+                "timestamp"=>time(),
+                "channelNum"=> $this->channelNum,
+                "sign"=> $sign,
+            ],
+            "req"=>[
+                "qrCodeText"=>$qrCodeText,
+                "terminalId"=>$terminalId,
+                "time"=>$time,
+                "medicalStep"=>$medicalStep,
+                "channelCode"=>$channelCode,
+                "useCityCode"=>$useCityCode,
+                "useCityName"=>$useCityName,
+                "hospitalCode"=>$this->hospitalId,
+                "hospitalName"=>$hospitalName,
+                "useType"=>$useType,
+            ],
+        ];
+        //curl
+        try {
+            return $this->curl($url,$data);
+        }catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
 }
